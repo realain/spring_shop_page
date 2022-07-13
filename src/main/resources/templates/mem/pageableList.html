@@ -1,0 +1,46 @@
+<html lang="ko" xmlns:th="http:/www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<!-- jsp@include file="header_nav.html" -->
+		<header th:insert="header_nav.html"></header>
+		<h1>멤버 리스트 test:<b th:text=${test}></b></h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>address</th>
+					<th>phone</th>
+					<th>signup_time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="mem:${memList}">
+					<td th:text="${mem.id}"></td>
+					<td th:text="${mem.name}"></td>
+					<td th:text="${mem.address}"></td>
+					<td th:text="${mem.phone}"></td>
+					<td th:text="${mem.signupTime}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:with="totalPages=${memList.totalPages}, nowPage=${memList.number+1},hasNext=${memList.hasNext()},hasPrev=${memList.hasPrevious()},startPage=${((nowPage-2)<=0)?1:nowPage-2},endPage=${((nowPage+2)>=totalPages)?totalPages:nowPage+2}">
+			<!-- <nav aria-label="Page navigation example">
+			  <ul class="pagination justify-content-center">
+			    <li th:classappend="${nowPage==startPage}?disabled" class="page-item">
+			      <a class="page-link" th:href="@{./{page}(page=${nowPage-1})}" tabindex="-1">Previous</a>
+			    </li>
+			    <th:block th:each="page:${#numbers.sequence(1,memList.totalPages)}">
+			    	<li th:classappend="${nowPage==page}?active" class="page-item"><a class="page-link" th:href="@{./{page}(page=${page})}" th:text="${page}"></a></li>
+			    </th:block>
+			    <li th:classappend="${nowPage==endPage}?disabled"  class="page-item">
+			      <a class="page-link" th:href="@{./{page}(page=${nowPage+1})}">Next</a>
+			    </li>
+			  </ul>
+			</nav> -->
+			<nav th:insert="pagination.html"></nav>
+		</div>
+	</body>
+</html>

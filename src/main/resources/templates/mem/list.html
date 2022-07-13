@@ -1,0 +1,37 @@
+<html lang="ko" xmlns:th="http:/www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<!-- jsp@include file="header_nav.html" -->
+		<header th:insert="header_nav.html"></header>
+		<h1>멤버 리스트 test:<b th:text=${test}></b></h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>address</th>
+					<th>phone</th>
+					<th>signup_time</th>
+					<!-- <th>itemBasket(list)</th> -->
+					<th>장바구니 수</th>
+					<th>장바구니 아이템 수</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="mem:${memList}"><!-- memList에 있는것을 하나씩 뺴와서 mem에 담겠다 -->
+					<td th:text="${mem.id}"></td>
+					<td th:text="${mem.name}"></td>
+					<td th:text="${mem.address}"></td>
+					<td th:text="${mem.phone}"></td>
+					<td th:text="${mem.signupTime}"></td>
+					<!-- <td th:text="${mem.itemBasket}"></td> -->
+					<td th:text="${mem.basketCount}"></td>
+					<td th:text="${mem.basketCountSum}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
